@@ -16,12 +16,14 @@ public class HashMapStorage<K,V> implements Storage<K,V> {
     @Override
     public void put(K key, V value) {
         if(storage.containsKey(key)){
+            System.out.println("Key found replacing with new value : "+key);
             storage.put(key, value);
         }
         else {
             if (isStorageFull()) {
                 throw new StorageFullException("Exception in Adding the element, Storage is Full");
             }
+            System.out.println("Inserting key to storage "+key);
             storage.put(key, value);
         }
     }
@@ -42,6 +44,6 @@ public class HashMapStorage<K,V> implements Storage<K,V> {
         storage.remove(key);
     }
     private boolean isStorageFull(){
-        return storage.size()<capacity;
+        return storage.size()>=capacity;
     }
 }
